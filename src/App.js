@@ -1,6 +1,6 @@
 import { Navbar, NavbarBrand } from "reactstrap";
 import { Component } from "react";
-
+import Menu from "./components/MenuComponent";
 export default class App extends Component {
     render() {
         return (
