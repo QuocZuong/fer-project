@@ -17,18 +17,22 @@ class DishDetail extends Component {
     }
 
     renderComments(dish) {
-        function formatDate(commentDate) {
-            const date = new Date(commentDate);
-            const options = { year: "numeric", month: "short", day: "2-digit" };
-            return date.toLocaleDateString(undefined, options);
-        }
+        // custom function to format date
+        // function formatDate(commentDate) {
+        //     const date = new Date(commentDate);
+        //     const options = { year: "numeric", month: "short", day: "2-digit" };
+        //     return date.toLocaleDateString(undefined, options);
+        // }
 
         if (dish?.comments?.length > 0) {
             return dish.comments.map((comment, index) => (
                 <li className="" key={comment.id + "_" + index}>
                     <p>{comment.comment}</p>{" "}
                     <p>
-                        -- {comment.author}, {formatDate(comment.date)}
+                        -- {comment.author},{" "}
+                        {new Intl.DateTimeFormat("en-US", { year: "numeric", month: "short", day: "2-digit" }).format(
+                            new Date(Date.parse(comment.date)),
+                        )}
                     </p>
                 </li>
             ));
@@ -39,11 +43,13 @@ class DishDetail extends Component {
 
     render() {
         return (
-            <div className="row">
-                <div className="col-12 col-md-5 m-1">{this.renderDish(this.props.selectedDish)}</div>
-                <div className="col-12 col-md-5 m-1">
-                    <h4>Comments</h4>
-                    <ol className="list-unstyled">{this.renderComments(this.props.selectedDish)}</ol>
+            <div className="container">
+                <div className="row">
+                    <div className="col-12 col-md-5 m-1">{this.renderDish(this.props.dish)}</div>
+                    <div className="col-12 col-md-5 m-1">
+                        <h4>Comments</h4>
+                        <ol className="list-unstyled">{this.renderComments(this.props.dish)}</ol>
+                    </div>
                 </div>
             </div>
         );
