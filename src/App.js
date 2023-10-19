@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { BrowserRouter } from "react-router-dom";
+
 import { DISHES } from "./shared/dishes";
 import Main from "./components/MainComponent";
 export default class App extends Component {
@@ -11,9 +13,11 @@ export default class App extends Component {
 
     render() {
         return (
-            <div className="App">
-                <Main />
-            </div>
+            <BrowserRouter>
+                <div className="App">
+                    <Main />
+                </div>
+            </BrowserRouter>
         );
     }
 }
