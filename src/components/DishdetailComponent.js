@@ -3,7 +3,6 @@ import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbIte
 import { Link } from "react-router-dom";
 
 function RenderDish(dish) {
-    console.log("render dish", dish);
     if (dish != null) {
         return (
             <Card>
@@ -19,7 +18,6 @@ function RenderDish(dish) {
 
 function RenderComments(dish) {
     if (dish?.comments?.length > 0) {
-        console.log("render comments");
         return dish.comments.map((comment, index) => (
             <li className="" key={comment.id + "_" + index}>
                 <p>{comment.comment}</p>{" "}
