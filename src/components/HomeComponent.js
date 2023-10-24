@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle } from "reactstrap";
 import Header from "./HeaderComponent";
-
+import Footer from "./FooterComponent";
 function RenderCard({ item }) {
     return (
         <Card>
@@ -17,7 +17,7 @@ function RenderCard({ item }) {
 
 function Home(props) {
     return (
-        <p>
+        <>
             <Header />
             <div className="container">
                 <div className="row align-items-start">
@@ -32,7 +32,8 @@ function Home(props) {
                     </div>
                 </div>
             </div>
-        </p>
+            <Footer />
+        </>
     );
 }
 

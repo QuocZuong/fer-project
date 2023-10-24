@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 import Menu from "./MenuComponent";
+import About from "./AboutComponent";
 import Contact from "./ContactComponent";
 import { DISHES } from "../shared/dishes";
 import DishDetail from "./DishdetailComponent";
@@ -49,10 +50,20 @@ class Main extends Component {
             );
         };
 
+        const MenuPage = () => {
+            return <Menu dishes={this.state.dishes} />;
+        };
+
+        const AboutPage = () => {
+            return <About leaders={this.state.leaders} />;
+        };
+
         return (
             <div>
                 <Switch>
                     <Route path="/home" component={HomePage} />
+                    <Route path="/aboutus" component={AboutPage} />
+                    <Route exact path="/menu" component={MenuPage} />
                     <Route path="/menu/:dishId" component={DishWithId} />
                     <Route exact path="/contactus" component={Contact} />
                     <Redirect to="/home" />
