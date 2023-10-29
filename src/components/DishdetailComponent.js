@@ -1,5 +1,20 @@
 import React from "react";
-import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem } from "reactstrap";
+import {
+    Card,
+    CardImg,
+    CardText,
+    CardBody,
+    CardTitle,
+    Breadcrumb,
+    BreadcrumbItem,
+    Form,
+    Row,
+    Label,
+    Col,
+    Button,
+} from "reactstrap";
+import { Control, LocalForm, Errors } from "react-redux-form";
+
 import { Link } from "react-router-dom";
 
 function RenderDish(dish) {
@@ -16,9 +31,9 @@ function RenderDish(dish) {
     } else return <div></div>;
 }
 
-function RenderComments(dish) {
-    if (dish?.comments?.length > 0) {
-        return dish.comments.map((comment, index) => (
+function RenderComments({ comments, addComment, dishId }) {
+    if (comments?.length > 0) {
+        const renderComments = comments.map((comment, index) => (
             <li className="" key={comment.id + "_" + index}>
                 <p>{comment.comment}</p>{" "}
                 <p>
@@ -29,9 +44,67 @@ function RenderComments(dish) {
                 </p>
             </li>
         ));
+
+        return (
+            <>
+                {renderComments}
+                <CommentForm dishId={dishId} addComment={addComment} />
+            </>
+        );
     } else {
         return <div></div>;
     }
+}
+
+const handleSubmit = (values, dishId, addComment) => {
+    addComment(dishId, values.rating, values.author, values.comment);
+};
+
+function CommentForm({ dishId, addComment }) {
+    return (
+        <LocalForm onSubmit={(values) => handleSubmit(values, dishId, addComment)}>
+            <Row>
+                <Col md={10}>
+                    <Control.text
+                        model=".comment"
+                        id="comment"
+                        name="comment"
+                        placeholder="Comment"
+                        className="form-control"
+                    />
+                </Col>
+            </Row>
+            <Row>
+                <Col md={10}>
+                    <Control.text
+                        model=".author"
+                        id="author"
+                        name="author"
+                        placeholder="Author"
+                        className="form-control"
+                    />
+                </Col>
+            </Row>
+            <Row>
+                <Col md={10}>
+                    <Control.text
+                        model=".rating"
+                        id="rating"
+                        name="rating"
+                        placeholder="Rating"
+                        className="form-control"
+                    />
+                </Col>
+            </Row>
+            <Row className="form-group mt-3">
+                <Col md={{ size: 10, offset: 2 }}>
+                    <Button type="submit" color="primary">
+                        Send Feedback
+                    </Button>
+                </Col>
+            </Row>
+        </LocalForm>
+    );
 }
 
 const DishDetail = (props) => {
@@ -55,7 +128,11 @@ const DishDetail = (props) => {
                         <RenderDish dish={props.dish} />
                     </div>
                     <div className="col-12 col-md-5 m-1">
-                        <RenderComments comments={props.comments} />
+                        <RenderComments
+                            comments={props.comments}
+                            addComment={props.addComment}
+                            dishId={props.dish.id}
+                        />
                     </div>
                 </div>
             </div>
