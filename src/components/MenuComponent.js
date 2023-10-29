@@ -1,7 +1,8 @@
 import { Card, CardImg, CardImgOverlay, CardTitle, Breadcrumb, BreadcrumbItem } from "reactstrap";
 import { Link } from "react-router-dom";
+import { Control, Form, Errors, actions } from "react-redux-form";
 
-function RenderMenuItem({ dish, onClick }) {
+function RenderMenuItem({ dish }) {
     return (
         <Card>
             <Link to={`/menu/${dish.id}`}>
