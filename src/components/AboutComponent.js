@@ -1,8 +1,6 @@
 import React from "react";
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from "reactstrap";
 import { Link } from "react-router-dom";
-import Footer from "./FooterComponent";
-import Header from "./HeaderComponent";
 
 function RenderLeader({ leaders }) {
     if (leaders !== null) {
@@ -29,7 +27,6 @@ function RenderLeader({ leaders }) {
 function About(props) {
     return (
         <>
-            <Header />
             <div className="container">
                 <div className="row">
                     <Breadcrumb>
@@ -104,7 +101,6 @@ function About(props) {
                     </div>
                 </div>
             </div>
-            <Footer />
         </>
     );
 }

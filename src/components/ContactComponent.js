@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Breadcrumb, BreadcrumbItem, Button, Form, FormGroup, Label, Input, Col, Row, FormFeedback } from "reactstrap";
 import { Link } from "react-router-dom";
-import Header from "./HeaderComponent";
-import Footer from "./FooterComponent";
 
 class Contact extends Component {
     constructor(props) {
@@ -80,7 +78,6 @@ class Contact extends Component {
         const errors = this.validate(this.state.firstname, this.state.lastname, this.state.telnum, this.state.email);
         return (
             <>
-                <Header />
                 <div className="container">
                     <div className="row">
                         <Breadcrumb>
@@ -220,7 +217,6 @@ class Contact extends Component {
                         </div>
                     </div>
                 </div>
-                <Footer />
             </>
         );
     }

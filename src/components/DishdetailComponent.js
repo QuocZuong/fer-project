@@ -1,8 +1,6 @@
 import React from "react";
 import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem } from "reactstrap";
 import { Link } from "react-router-dom";
-import Footer from "./FooterComponent";
-import Header from "./HeaderComponent";
 
 function RenderDish(dish) {
     if (dish != null) {
@@ -39,7 +37,6 @@ function RenderComments(dish) {
 const DishDetail = (props) => {
     return (
         <>
-            <Header />
             <div className="container">
                 <div className="row">
                     <Breadcrumb>
@@ -62,7 +59,6 @@ const DishDetail = (props) => {
                     </div>
                 </div>
             </div>
-            <Footer />
         </>
     );
 };

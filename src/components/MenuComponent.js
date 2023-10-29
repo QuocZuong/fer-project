@@ -1,7 +1,5 @@
 import { Card, CardImg, CardImgOverlay, CardTitle, Breadcrumb, BreadcrumbItem } from "reactstrap";
 import { Link } from "react-router-dom";
-import Header from "./HeaderComponent";
-import Footer from "./FooterComponent";
 
 function RenderMenuItem({ dish, onClick }) {
     return (
@@ -27,7 +25,6 @@ const Menu = (props) => {
 
     return (
         <>
-            <Header />
             <div className="container">
                 <div className="row">
                     <Breadcrumb>
@@ -43,7 +40,6 @@ const Menu = (props) => {
                 </div>
                 <div className="row">{menu}</div>
             </div>
-            <Footer />
         </>
     );
 };
