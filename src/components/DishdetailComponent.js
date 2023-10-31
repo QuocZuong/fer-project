@@ -7,7 +7,6 @@ import {
     CardTitle,
     Breadcrumb,
     BreadcrumbItem,
-    Form,
     Row,
     Label,
     Col,
@@ -21,9 +20,9 @@ import { Loading } from "./LoadingComponent";
 
 import { Link } from "react-router-dom";
 
-const required = (val) => val && val.length;
+const required = (val) => val?.length;
 const maxLength = (len) => (val) => !val || val.length <= len;
-const minLength = (len) => (val) => val && val.length >= len;
+const minLength = (len) => (val) => val?.length >= len;
 
 class CommentForm extends Component {
     constructor(props) {
@@ -95,7 +94,7 @@ class CommentForm extends Component {
                                         model=".author"
                                         show="touched"
                                         messages={{
-                                            required: "Required",
+                                            required: "Required ",
                                             minLength: "Must be greater than 2 characters",
                                             maxLength: "Must be 15 characters or less",
                                         }}
@@ -111,7 +110,7 @@ class CommentForm extends Component {
                                         model=".comment"
                                         id="comment"
                                         name="comment"
-                                        rows="12"
+                                        rows="6"
                                         className="form-control"
                                     />
                                 </Col>
