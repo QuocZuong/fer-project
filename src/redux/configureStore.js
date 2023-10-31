@@ -7,7 +7,7 @@ import { Dishes } from "./dishes";
 import { Comments } from "./comments";
 import { Promotions } from "./promotions";
 import { Leaders } from "./leaders";
-import { InitialFeedback } from "./forms";
+import { InitialFeedback } from "./form";
 
 export const ConfigureStore = () => {
     const store = createStore(
