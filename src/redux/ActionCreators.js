@@ -24,7 +24,7 @@ export const postComment = (dishId, rating, author, comment) => (dispatch) => {
                 if (response.ok) {
                     return response;
                 } else {
-                    const error = new Error("Error " + response.status + ": " + response.statusText);
+                    var error = new Error("Error " + response.status + ": " + response.statusText);
                     error.response = response;
                     throw error;
                 }
