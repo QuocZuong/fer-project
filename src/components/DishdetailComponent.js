@@ -142,10 +142,10 @@ function RenderDish(dish) {
                 }}
             >
                 <Card>
-                    <CardImg top src={baseUrl + dish.image} alt={dish.name} />
+                    <CardImg top src={baseUrl + dish.dish.image} alt={dish.dish.name} />
                     <CardBody>
-                        <CardTitle>{dish.name}</CardTitle>
-                        <CardText>{dish.description}</CardText>
+                        <CardTitle>{dish.dish.name}</CardTitle>
+                        <CardText>{dish.dish.description}</CardText>
                     </CardBody>
                 </Card>
             </FadeTransform>
