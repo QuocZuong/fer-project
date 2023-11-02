@@ -1,5 +1,4 @@
 import * as ActionTypes from "./ActionTypes";
-import { DISHES } from "../shared/dishes";
 import { baseUrl } from "../shared/baseUrl";
 
 export const postComment = (dishId, rating, author, comment) => (dispatch) => {
@@ -24,7 +23,7 @@ export const postComment = (dishId, rating, author, comment) => (dispatch) => {
                 if (response.ok) {
                     return response;
                 } else {
-                    var error = new Error("Error " + response.status + ": " + response.statusText);
+                    const error = new Error("Error " + response.status + ": " + response.statusText);
                     error.response = response;
                     throw error;
                 }
@@ -55,14 +54,13 @@ export const fetchDishes = () => (dispatch) => {
                 if (response.ok) {
                     return response;
                 } else {
-                    var error = new Error("Error " + response.status + ": " + response.statusText);
+                    const error = new Error("Error " + response.status + ": " + response.statusText);
                     error.response = response;
                     throw error;
                 }
             },
             (error) => {
-                var errmess = new Error(error.message);
-                throw errmess;
+                throw new Error(error.message);
             },
         )
         .then((response) => response.json())
@@ -91,14 +89,13 @@ export const fetchComments = () => (dispatch) => {
                 if (response.ok) {
                     return response;
                 } else {
-                    var error = new Error("Error " + response.status + ": " + response.statusText);
+                    const error = new Error("Error " + response.status + ": " + response.statusText);
                     error.response = response;
                     throw error;
                 }
             },
             (error) => {
-                var errmess = new Error(error.message);
-                throw errmess;
+                throw new Error(error.message);
             },
         )
         .then((response) => response.json())
@@ -125,14 +122,13 @@ export const fetchPromos = () => (dispatch) => {
                 if (response.ok) {
                     return response;
                 } else {
-                    var error = new Error("Error " + response.status + ": " + response.statusText);
+                    const error = new Error("Error " + response.status + ": " + response.statusText);
                     error.response = response;
                     throw error;
                 }
             },
             (error) => {
-                var errmess = new Error(error.message);
-                throw errmess;
+                throw new Error(error.message);
             },
         )
         .then((response) => response.json())
@@ -191,10 +187,21 @@ export const addLeaders = (leaders) => ({
     payload: leaders,
 });
 
-export const postFeedback = (formValues) => (dispatch) => {
+export const postFeedback = (values) => () => {
+    const newFeedback = {
+        firstname: values.firstname,
+        lastname: values.lastname,
+        telnum: values.telnum,
+        email: values.email,
+        agree: values.agree,
+        contactType: values.contactType,
+        message: values.message,
+    };
+    newFeedback.date = new Date().toISOString();
+
     return fetch(baseUrl + "feedback", {
         method: "POST",
-        body: JSON.stringify(formValues),
+        body: JSON.stringify(newFeedback),
         headers: {
             "Content-Type": "application/json",
         },
@@ -215,9 +222,17 @@ export const postFeedback = (formValues) => (dispatch) => {
             },
         )
         .then((response) => response.json())
-        .then((response) => alert("Thank you for your feedback!\n " + JSON.stringify(response)))
+        .then((response) => {
+            alert("Thanks for your feedback!\n " + JSON.stringify(response));
+            addFeedback(response);
+        })
         .catch((error) => {
-            console.log("post comments", error.message);
-            alert("Your comment could not be posted\nError: " + error.message);
+            console.log("post feedback: ", error.message);
+            alert("Your feedback could not be posted\nError: " + error.message);
         });
 };
+
+export const addFeedback = (feedback) => ({
+    type: ActionTypes.POST_FEEDBACK,
+    payload: feedback,
+});
